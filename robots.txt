@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ajaypanchal25.github.io/Morlo-Group-patan/sitemap.xml
