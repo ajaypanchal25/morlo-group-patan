@@ -26,7 +26,7 @@ const CONFIG = {
 };
 
 // ==========================================================================
-// 1. UNIVERSAL IMAGE ERROR & FALLBACK HANDLER (FOR GITHUB PAGES & LOCAL)
+// 1. UNIVERSAL IMAGE ERROR & FALLBACK HANDLER (WORKS ON GITHUB & LOCAL)
 // ==========================================================================
 window.handleImageError = function (img, fallbacks) {
   if (!img) return;
@@ -38,25 +38,26 @@ window.handleImageError = function (img, fallbacks) {
   if (nextIndex < list.length && list[nextIndex]) {
     img.dataset.triedFallbackIndex = nextIndex;
     img.src = list[nextIndex];
-  } else {
-    // If all relative paths fail, try direct root filename fallback
-    if (!img.dataset.triedRootFallback) {
-      img.dataset.triedRootFallback = "true";
-      const parts = currentSrc.split("/");
-      const filename = parts[parts.length - 1].split("?")[0];
-      if (filename && !currentSrc.endsWith("/" + filename)) {
-        img.src = "images/" + filename;
-        return;
+  } else if (!img.dataset.triedRootFallback) {
+    img.dataset.triedRootFallback = "true";
+    const parts = currentSrc.split("/");
+    const filename = parts[parts.length - 1].split("?")[0];
+    if (filename) {
+      if (filename.endsWith(".jpg")) {
+        img.src = filename + ".jpeg";
+      } else if (filename.endsWith(".png")) {
+        img.src = filename + ".png";
+      } else if (filename.endsWith(".jpeg") && filename.includes(".jpg.jpeg")) {
+        img.src = filename.replace(".jpg.jpeg", ".jpg");
+      } else {
+        img.src = filename;
       }
     }
-    // Graceful fallback background if image truly unavailable
-    img.style.display = "block";
-    img.style.background = "linear-gradient(135deg, #0d162a, #142240)";
   }
 };
 
 // ==========================================================================
-// 2. GALLERY DATA (MANSI DAVE PHOTOS/VIDEOS & OWNER SHAILESH GOSWAMI)
+// 2. GALLERY DATA (SUPPORTING BOTH GITHUB ROOT & ASSETS PATHS)
 // ==========================================================================
 const GALLERY_DATA = {
   mansiDave: {
@@ -64,50 +65,50 @@ const GALLERY_DATA = {
       {
         id: "md-p1",
         title: "MANSI DAVE",
-        src: "assets/images/mansi-dave/mansidave.jpg",
-        fallbacks: ["images/mansi-dave/mansidave.jpg", "images/mansidave.jpg", "assets/images/events/mansidave.jpg.jpeg"],
+        src: "mansidave.jpg.jpeg",
+        fallbacks: ["mansidave.jpg", "assets/images/mansi-dave/mansidave.jpg", "images/mansidave.jpg", "Mansi.jpeg"],
         tag: "Lead Singer & Star Performer"
       },
       {
         id: "md-p2",
         title: "LIVE CONCERT",
-        src: "assets/images/mansi-dave/mansi-stage.jpg",
-        fallbacks: ["images/mansi-dave/mansi-stage.jpg", "images/mansi-stage.jpg"],
+        src: "mansi-stage.jpg",
+        fallbacks: ["mansi1.jpg.jpeg", "assets/images/mansi-dave/mansi-stage.jpg", "images/mansi-stage.jpg", "mansi1.jpg"],
         tag: "Stage Live Performance"
       },
       {
         id: "md-p3",
         title: "RAAS GARBA NIGHT",
-        src: "assets/images/mansi-dave/mansi1.jpg",
-        fallbacks: ["images/mansi-dave/mansi1.jpg", "images/mansi1.jpg", "assets/images/events/mansi1.jpg.jpeg"],
+        src: "mansi1.jpg.jpeg",
+        fallbacks: ["mansi1.jpg", "assets/images/mansi-dave/mansi1.jpg", "images/mansi1.jpg", "mansidave.jpg"],
         tag: "Navratri Garba Specialist"
       },
       {
         id: "md-p4",
         title: "STAR VOCALIST",
-        src: "assets/images/mansi-dave/mansi2.jpg",
-        fallbacks: ["images/mansi-dave/mansi2.jpg", "images/mansi2.jpg", "assets/images/mansi-dave/Mansi.jpeg"],
+        src: "Mansi.jpeg",
+        fallbacks: ["mansi2.jpg", "assets/images/mansi-dave/Mansi.jpeg", "images/Mansi.jpeg", "mansidave.jpg.jpeg"],
         tag: "Folk & Devotional Melodies"
       },
       {
         id: "md-p5",
         title: "FOLK ARTIST",
-        src: "assets/images/mansi-dave/Mansi.jpeg",
-        fallbacks: ["images/mansi-dave/Mansi.jpeg", "images/Mansi.jpeg", "assets/images/events/Mansi.jpeg"],
+        src: "mansi2.jpg",
+        fallbacks: ["Mansi.jpeg", "assets/images/mansi-dave/mansi2.jpg", "images/mansi2.jpg"],
         tag: "Traditional Gujarati Folk"
       },
       {
         id: "md-p6",
         title: "MEDIA SPOTLIGHT",
-        src: "assets/images/mansi-dave/mansi-interview.jpg",
-        fallbacks: ["images/mansi-dave/mansi-interview.jpg", "images/mansi-interview.jpg", "assets/images/events/mansi-interview.jpg"],
+        src: "mansi-interview.jpg",
+        fallbacks: ["assets/images/mansi-dave/mansi-interview.jpg", "images/mansi-interview.jpg", "mansidave.jpg"],
         tag: "Special Interview & Event"
       },
       {
         id: "md-p7",
         title: "SEVA CAMP SANMAN",
-        src: "assets/images/mansi-dave/sevacamp.jpg",
-        fallbacks: ["images/mansi-dave/sevacamp.jpg", "images/sevacamp.jpg", "assets/images/events/sevacamp.jpg"],
+        src: "sevacamp.jpg",
+        fallbacks: ["sevacamp.jpg.jpg", "assets/images/mansi-dave/sevacamp.jpg", "images/sevacamp.jpg"],
         tag: "Felicitation & Public Honors"
       }
     ],
@@ -164,99 +165,99 @@ const GALLERY_DATA = {
       {
         id: "ow-p1",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/withpm.jpg",
-        fallbacks: ["images/owner/withpm.jpg", "images/withpm.jpg", "assets/images/events/withpm.jpg.jpg"],
+        src: "withpm.jpg",
+        fallbacks: ["withpm.jpg.jpg", "assets/images/owner/withpm.jpg", "images/withpm.jpg", "owner1.jpg"],
         tag: "With Hon. PM Narendra Modi"
       },
       {
         id: "ow-p2",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner1.jpg",
-        fallbacks: ["images/owner/owner1.jpg", "images/owner1.jpg", "assets/images/events/owner1.jpg"],
+        src: "owner1.jpg",
+        fallbacks: ["assets/images/owner/owner1.jpg", "images/owner1.jpg"],
         tag: "Founder & Event Director"
       },
       {
         id: "ow-p3",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner2.jpg",
-        fallbacks: ["images/owner/owner2.jpg", "images/owner2.jpg"],
+        src: "owner2.jpg",
+        fallbacks: ["assets/images/owner/owner2.jpg", "images/owner2.jpg", "owner1.jpg"],
         tag: "Cultural Event Organization"
       },
       {
         id: "ow-p4",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner3.jpg",
-        fallbacks: ["images/owner/owner3.jpg", "images/owner3.jpg", "assets/images/events/owner3.jpg"],
+        src: "owner3.jpg",
+        fallbacks: ["assets/images/owner/owner3.jpg", "images/owner3.jpg"],
         tag: "Grand Event Management"
       },
       {
         id: "ow-p5",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner4.jpg",
-        fallbacks: ["images/owner/owner4.jpg", "images/owner4.jpg", "assets/images/events/owner4.jpg"],
+        src: "owner4.jpg",
+        fallbacks: ["assets/images/owner/owner4.jpg", "images/owner4.jpg"],
         tag: "Stage & Sound Direction"
       },
       {
         id: "ow-p6",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner5.jpg",
-        fallbacks: ["images/owner/owner5.jpg", "images/owner5.jpg", "assets/images/events/owner5.jpg"],
+        src: "owner5.jpg",
+        fallbacks: ["assets/images/owner/owner5.jpg", "images/owner5.jpg"],
         tag: "Live Production Leadership"
       },
       {
         id: "ow-p7",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner6.jpg",
-        fallbacks: ["images/owner/owner6.jpg", "images/owner6.jpg", "assets/images/events/owner6.jpg"],
+        src: "owner6.jpg",
+        fallbacks: ["assets/images/owner/owner6.jpg", "images/owner6.jpg"],
         tag: "Artist Coordination"
       },
       {
         id: "ow-p8",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner7.jpg",
-        fallbacks: ["images/owner/owner7.jpg", "images/owner7.jpg", "assets/images/events/owner7.jpg"],
+        src: "owner7.jpg",
+        fallbacks: ["assets/images/owner/owner7.jpg", "images/owner7.jpg"],
         tag: "Stage Management"
       },
       {
         id: "ow-p9",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner8.jpg",
-        fallbacks: ["images/owner/owner8.jpg", "images/owner8.jpg", "assets/images/events/owner8.jpg"],
+        src: "owner8.jpg",
+        fallbacks: ["assets/images/owner/owner8.jpg", "images/owner8.jpg"],
         tag: "Morlo Team Leadership"
       },
       {
         id: "ow-p10",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner9.jpg",
-        fallbacks: ["images/owner/owner9.jpg", "images/owner9.jpg", "assets/images/events/owner9.jpeg"],
+        src: "owner9.jpeg",
+        fallbacks: ["owner9.jpg", "assets/images/owner/owner9.jpg", "images/owner9.jpg"],
         tag: "Grand Program Setup"
       },
       {
         id: "ow-p11",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner10.jpg",
-        fallbacks: ["images/owner/owner10.jpg", "images/owner10.jpg", "assets/images/events/owner10.jpeg"],
+        src: "owner10.jpeg",
+        fallbacks: ["owner10.jpg", "assets/images/owner/owner10.jpg", "images/owner10.jpg"],
         tag: "Cultural Recognition"
       },
       {
         id: "ow-p12",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner11.jpg",
-        fallbacks: ["images/owner/owner11.jpg", "images/owner11.jpg", "assets/images/events/owner11.jpeg"],
+        src: "owner11.jpeg",
+        fallbacks: ["owner11.jpg", "assets/images/owner/owner11.jpg", "images/owner11.jpg"],
         tag: "Stage Felicitation"
       },
       {
         id: "ow-p13",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/owner12.jpg",
-        fallbacks: ["images/owner/owner12.jpg", "images/owner12.jpg", "assets/images/events/owner12.jpeg"],
+        src: "owner12.jpeg",
+        fallbacks: ["owner12.jpg", "assets/images/owner/owner12.jpg", "images/owner12.jpg"],
         tag: "Heritage Celebrations"
       },
       {
         id: "ow-p14",
         title: "SHAILESH GOSWAMI",
-        src: "assets/images/owner/sevacamp.jpg",
-        fallbacks: ["images/owner/sevacamp.jpg", "images/sevacamp.jpg", "assets/images/events/sevacamp.jpg"],
+        src: "sevacamp.jpg",
+        fallbacks: ["sevacamp.jpg.jpg", "assets/images/owner/sevacamp.jpg", "images/sevacamp.jpg"],
         tag: "Social Service & Seva Camp"
       }
     ]
@@ -662,7 +663,7 @@ window.triggerDirectWhatsApp = function () {
 // 9. INQUIRY FORM (Direct WhatsApp Dispatch)
 // ==========================================================================
 function initInquiryForm() {
-  const form = document.getElementById("inquiryForm");
+  const form = document.getElementById("inquiryForm") || document.getElementById("eventInquiryForm");
   if (!form) return;
 
   // Set minimum date to today
