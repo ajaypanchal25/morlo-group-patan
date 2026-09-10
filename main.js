@@ -57,7 +57,8 @@ window.handleImageError = function (img, fallbacks) {
 };
 
 // ==========================================================================
-// 2. GALLERY DATA (SUPPORTING BOTH GITHUB ROOT & ASSETS PATHS)
+// ==========================================================================
+// 2. GALLERY DATA (CLEAN UNIQUE PHOTOS & 1-TIME PM PHOTO)
 // ==========================================================================
 const GALLERY_DATA = {
   mansiDave: {
@@ -66,49 +67,35 @@ const GALLERY_DATA = {
         id: "md-p1",
         title: "MANSI DAVE",
         src: "mansidave.jpg.jpeg",
-        fallbacks: ["mansidave.jpg", "assets/images/mansi-dave/mansidave.jpg", "images/mansidave.jpg", "Mansi.jpeg"],
+        fallbacks: ["mansidave.jpg", "assets/images/mansi-dave/mansidave.jpg", "images/mansidave.jpg"],
         tag: "Lead Singer & Star Performer"
       },
       {
         id: "md-p2",
-        title: "LIVE CONCERT",
-        src: "mansi-stage.jpg",
-        fallbacks: ["mansi1.jpg.jpeg", "assets/images/mansi-dave/mansi-stage.jpg", "images/mansi-stage.jpg", "mansi1.jpg"],
+        title: "LIVE STAGE CONCERT",
+        src: "mansi1.jpg.jpeg",
+        fallbacks: ["mansi1.jpg", "mansi-stage.jpg", "assets/images/mansi-dave/mansi1.jpg", "images/mansi-stage.jpg"],
         tag: "Stage Live Performance"
       },
       {
         id: "md-p3",
-        title: "RAAS GARBA NIGHT",
-        src: "mansi1.jpg.jpeg",
-        fallbacks: ["mansi1.jpg", "assets/images/mansi-dave/mansi1.jpg", "images/mansi1.jpg", "mansidave.jpg"],
-        tag: "Navratri Garba Specialist"
-      },
-      {
-        id: "md-p4",
-        title: "STAR VOCALIST",
+        title: "FOLK & DEVOTIONAL",
         src: "Mansi.jpeg",
-        fallbacks: ["mansi2.jpg", "assets/images/mansi-dave/Mansi.jpeg", "images/Mansi.jpeg", "mansidave.jpg.jpeg"],
-        tag: "Folk & Devotional Melodies"
-      },
-      {
-        id: "md-p5",
-        title: "FOLK ARTIST",
-        src: "mansi2.jpg",
-        fallbacks: ["Mansi.jpeg", "assets/images/mansi-dave/mansi2.jpg", "images/mansi2.jpg"],
+        fallbacks: ["mansi.jpg", "mansi2.jpg", "assets/images/mansi-dave/Mansi.jpeg", "images/Mansi.jpeg"],
         tag: "Traditional Gujarati Folk"
       },
       {
-        id: "md-p6",
+        id: "md-p4",
         title: "MEDIA SPOTLIGHT",
         src: "mansi-interview.jpg",
-        fallbacks: ["assets/images/mansi-dave/mansi-interview.jpg", "images/mansi-interview.jpg", "mansidave.jpg"],
+        fallbacks: ["assets/images/mansi-dave/mansi-interview.jpg", "images/mansi-interview.jpg"],
         tag: "Special Interview & Event"
       },
       {
-        id: "md-p7",
+        id: "md-p5",
         title: "SEVA CAMP SANMAN",
-        src: "sevacamp.jpg",
-        fallbacks: ["sevacamp.jpg.jpg", "assets/images/mansi-dave/sevacamp.jpg", "images/sevacamp.jpg"],
+        src: "sevacamp.jpg.jpg",
+        fallbacks: ["sevacamp.jpg", "assets/images/mansi-dave/sevacamp.jpg", "images/sevacamp.jpg"],
         tag: "Felicitation & Public Honors"
       }
     ],
@@ -164,98 +151,84 @@ const GALLERY_DATA = {
     photos: [
       {
         id: "ow-p1",
-        title: "SHAILESH GOSWAMI",
+        title: "WITH HON. PM NARENDRA MODI",
         src: "withpm.jpg",
-        fallbacks: ["withpm.jpg.jpg", "assets/images/owner/withpm.jpg", "images/withpm.jpg", "owner1.jpg"],
-        tag: "With Hon. PM Narendra Modi"
+        fallbacks: ["withpm.jpg.jpg", "assets/images/owner/withpm.jpg", "images/withpm.jpg"],
+        tag: "State Honor & PM Recognition"
       },
       {
         id: "ow-p2",
-        title: "SHAILESH GOSWAMI",
-        src: "owner1.jpg",
-        fallbacks: ["assets/images/owner/owner1.jpg", "images/owner1.jpg"],
-        tag: "Founder & Event Director"
-      },
-      {
-        id: "ow-p3",
-        title: "SHAILESH GOSWAMI",
+        title: "EVENT MANAGEMENT",
         src: "owner2.jpg",
-        fallbacks: ["assets/images/owner/owner2.jpg", "images/owner2.jpg", "owner1.jpg"],
+        fallbacks: ["assets/images/owner/owner2.jpg", "images/owner2.jpg"],
         tag: "Cultural Event Organization"
       },
       {
-        id: "ow-p4",
-        title: "SHAILESH GOSWAMI",
-        src: "owner3.jpg",
-        fallbacks: ["assets/images/owner/owner3.jpg", "images/owner3.jpg"],
-        tag: "Grand Event Management"
-      },
-      {
-        id: "ow-p5",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p3",
+        title: "STAGE & SOUND PRODUCTION",
         src: "owner4.jpg",
         fallbacks: ["assets/images/owner/owner4.jpg", "images/owner4.jpg"],
         tag: "Stage & Sound Direction"
       },
       {
-        id: "ow-p6",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p4",
+        title: "LIVE PRODUCTION LEADERSHIP",
         src: "owner5.jpg",
         fallbacks: ["assets/images/owner/owner5.jpg", "images/owner5.jpg"],
         tag: "Live Production Leadership"
       },
       {
-        id: "ow-p7",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p5",
+        title: "ARTIST COORDINATION",
         src: "owner6.jpg",
         fallbacks: ["assets/images/owner/owner6.jpg", "images/owner6.jpg"],
         tag: "Artist Coordination"
       },
       {
-        id: "ow-p8",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p6",
+        title: "STAGE MANAGEMENT",
         src: "owner7.jpg",
         fallbacks: ["assets/images/owner/owner7.jpg", "images/owner7.jpg"],
         tag: "Stage Management"
       },
       {
-        id: "ow-p9",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p7",
+        title: "TEAM LEADERSHIP",
         src: "owner8.jpg",
         fallbacks: ["assets/images/owner/owner8.jpg", "images/owner8.jpg"],
         tag: "Morlo Team Leadership"
       },
       {
-        id: "ow-p10",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p8",
+        title: "GRAND PROGRAM SETUP",
         src: "owner9.jpeg",
         fallbacks: ["owner9.jpg", "assets/images/owner/owner9.jpg", "images/owner9.jpg"],
         tag: "Grand Program Setup"
       },
       {
-        id: "ow-p11",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p9",
+        title: "CULTURAL RECOGNITION",
         src: "owner10.jpeg",
         fallbacks: ["owner10.jpg", "assets/images/owner/owner10.jpg", "images/owner10.jpg"],
         tag: "Cultural Recognition"
       },
       {
-        id: "ow-p12",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p10",
+        title: "STAGE FELICITATION",
         src: "owner11.jpeg",
         fallbacks: ["owner11.jpg", "assets/images/owner/owner11.jpg", "images/owner11.jpg"],
         tag: "Stage Felicitation"
       },
       {
-        id: "ow-p13",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p11",
+        title: "HERITAGE CELEBRATIONS",
         src: "owner12.jpeg",
         fallbacks: ["owner12.jpg", "assets/images/owner/owner12.jpg", "images/owner12.jpg"],
         tag: "Heritage Celebrations"
       },
       {
-        id: "ow-p14",
-        title: "SHAILESH GOSWAMI",
+        id: "ow-p12",
+        title: "SOCIAL SERVICE & SEVA CAMP",
         src: "sevacamp.jpg",
         fallbacks: ["sevacamp.jpg.jpg", "assets/images/owner/sevacamp.jpg", "images/sevacamp.jpg"],
         tag: "Social Service & Seva Camp"
@@ -278,6 +251,7 @@ function initMorloApp() {
   initInquiryForm();
   initVideoModal();
   initDynamicContactLinks();
+  initAllImageClickLightbox();
 }
 
 if (document.readyState === "loading") {
@@ -349,30 +323,26 @@ function initNavbar() {
 }
 
 // ==========================================================================
-// 5. GALLERY RENDERING
+// 5. GALLERY RENDERING (CLEAN PHOTOS WITH ZOOM ON TOUCH/CLICK)
 // ==========================================================================
 function renderGallery() {
-  // 1. Render Mansi Dave Photos
+  // 1. Render Mansi Dave Photos (Clean, No repetitive text overlay)
   const mdPhotosGrid = document.getElementById("mansiDavePhotosGrid");
   if (mdPhotosGrid) {
     mdPhotosGrid.innerHTML = GALLERY_DATA.mansiDave.photos.map((item, index) => {
       const fbStr = JSON.stringify(item.fallbacks || []).replace(/"/g, '&quot;');
       return `
-        <div class="gallery-item-card" onclick="openPhotoGalleryModal('mansi', ${index})" style="cursor: pointer;" title="Click to view full photo">
+        <div class="gallery-item-card" onclick="openPhotoGalleryModal('mansi', ${index})" style="cursor: pointer;" title="Touch / Click to view full photo">
           <div class="gallery-img-container">
             <img src="${item.src}" 
-                 alt="${item.title} - ${item.tag}" 
+                 alt="${item.title}" 
                  loading="lazy" 
                  decoding="async"
                  onerror="handleImageError(this, ${fbStr});">
             <div class="gallery-zoom-overlay">
-              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
               </svg>
-            </div>
-            <div class="gallery-caption-overlay">
-              <span class="gallery-caption-title">${item.title}</span>
-              <span class="gallery-caption-tag">${item.tag}</span>
             </div>
           </div>
         </div>
@@ -393,37 +363,29 @@ function renderGallery() {
                 <path d="M8 5v14l11-7z"/>
               </svg>
             </div>
-            <div class="gallery-caption-overlay">
-              <span class="gallery-caption-title">${item.title}</span>
-              <span class="gallery-caption-tag">${item.tag}</span>
-            </div>
           </div>
         </div>
       `;
     }).join("");
   }
 
-  // 3. Render Owner Photos Grid
+  // 3. Render Owner Photos Grid (Clean, Zero repetitive text under photos)
   const ownerPhotosGrid = document.getElementById("ownerPhotosGrid");
   if (ownerPhotosGrid) {
     ownerPhotosGrid.innerHTML = GALLERY_DATA.owner.photos.map((item, index) => {
       const fbStr = JSON.stringify(item.fallbacks || []).replace(/"/g, '&quot;');
       return `
-        <div class="gallery-item-card" onclick="openPhotoGalleryModal('owner', ${index})" style="cursor: pointer;" title="Click to view full photo">
+        <div class="gallery-item-card" onclick="openPhotoGalleryModal('owner', ${index})" style="cursor: pointer;" title="Touch / Click to view full photo">
           <div class="gallery-img-container">
             <img src="${item.src}" 
-                 alt="${item.title} - ${item.tag}" 
+                 alt="${item.title}" 
                  loading="lazy" 
                  decoding="async"
                  onerror="handleImageError(this, ${fbStr});">
             <div class="gallery-zoom-overlay">
-              <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
               </svg>
-            </div>
-            <div class="gallery-caption-overlay">
-              <span class="gallery-caption-title">${item.title}</span>
-              <span class="gallery-caption-tag">${item.tag}</span>
             </div>
           </div>
         </div>
@@ -520,7 +482,7 @@ window.openMansiDaveGallery = function (subtab = 'mansiDavePhotosView') {
 };
 
 // ==========================================================================
-// 6. PHOTO VIEWER & VIDEO MODAL LIGHTBOX
+// 6. PHOTO VIEWER & VIDEO MODAL LIGHTBOX (TOUCH & SWIPE ENABLED)
 // ==========================================================================
 window.openPhotoGalleryModal = function (category, index) {
   if (category === 'mansi') {
@@ -541,26 +503,28 @@ function displayCurrentModalPhoto() {
 
   if (!modal || !title || !playerBox) return;
 
-  const caption = `${item.title} - ${item.tag}`;
-  title.textContent = caption;
+  title.textContent = `Photo ${currentItemIndex + 1} of ${currentGalleryItems.length}`;
 
   const fbStr = JSON.stringify(item.fallbacks || []).replace(/"/g, '&quot;');
 
   playerBox.innerHTML = `
-    <div style="position: relative; text-align: center; padding: 10px; max-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <img src="${item.src}" 
-           alt="${caption}" 
-           style="max-width: 100%; max-height: 70vh; border-radius: 12px; object-fit: contain; box-shadow: 0 10px 30px rgba(0,0,0,0.9); border: 1px solid var(--border-gold);" 
-           onerror="handleImageError(this, ${fbStr});">
+    <div id="modalPhotoContainer" style="position: relative; text-align: center; padding: 6px; max-height: 82vh; display: flex; flex-direction: column; align-items: center; justify-content: center; user-select: none;">
+      <div style="position: relative; max-width: 100%; display: flex; justify-content: center; align-items: center;">
+        <img id="modalActiveImg" 
+             src="${item.src}" 
+             alt="Morlo Group Patan" 
+             style="max-width: 100%; max-height: 72vh; border-radius: 12px; object-fit: contain; box-shadow: 0 12px 40px rgba(0,0,0,0.95); border: 1px solid var(--border-gold); transition: transform 0.2s ease;" 
+             onerror="handleImageError(this, ${fbStr});">
+      </div>
       
-      <div style="margin-top: 14px; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 500px;">
-        <button class="btn btn-secondary btn-sm" onclick="navigatePhotoModal(-1)" ${currentItemIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
-          &larr; Previous
+      <div style="margin-top: 14px; display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 480px; gap: 12px;">
+        <button class="btn btn-secondary btn-sm" onclick="navigatePhotoModal(-1)" ${currentItemIndex === 0 ? 'disabled style="opacity:0.35; cursor:not-allowed;"' : ''}>
+          &larr; Prev
         </button>
-        <span style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 700;">
+        <span style="font-size: 0.9rem; color: var(--gold-primary); font-weight: 700; letter-spacing: 1px;">
           ${currentItemIndex + 1} / ${currentGalleryItems.length}
         </span>
-        <button class="btn btn-secondary btn-sm" onclick="navigatePhotoModal(1)" ${currentItemIndex === currentGalleryItems.length - 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+        <button class="btn btn-secondary btn-sm" onclick="navigatePhotoModal(1)" ${currentItemIndex === currentGalleryItems.length - 1 ? 'disabled style="opacity:0.35; cursor:not-allowed;"' : ''}>
           Next &rarr;
         </button>
       </div>
@@ -569,6 +533,7 @@ function displayCurrentModalPhoto() {
 
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
+  attachTouchSwipeListeners();
 }
 
 window.navigatePhotoModal = function (direction) {
@@ -590,10 +555,10 @@ window.openPhotoViewer = function (imgSrc, caption = "Morlo Group Patan", fallba
   const fbStr = JSON.stringify(fallbacks).replace(/"/g, '&quot;');
 
   playerBox.innerHTML = `
-    <div style="text-align: center; padding: 10px; max-height: 80vh; display: flex; align-items: center; justify-content: center;">
+    <div style="text-align: center; padding: 6px; max-height: 82vh; display: flex; align-items: center; justify-content: center;">
       <img src="${imgSrc}" 
            alt="${caption}" 
-           style="max-width: 100%; max-height: 75vh; border-radius: 12px; object-fit: contain; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 1px solid var(--border-gold);" 
+           style="max-width: 100%; max-height: 75vh; border-radius: 12px; object-fit: contain; box-shadow: 0 12px 40px rgba(0,0,0,0.95); border: 1px solid var(--border-gold);" 
            onerror="handleImageError(this, ${fbStr});">
     </div>
   `;
@@ -601,6 +566,40 @@ window.openPhotoViewer = function (imgSrc, caption = "Morlo Group Patan", fallba
   modal.classList.add("active");
   document.body.style.overflow = "hidden";
 };
+
+// Touch swipe listener on photo container for mobile swipe gestures
+function attachTouchSwipeListeners() {
+  const container = document.getElementById("modalPhotoContainer");
+  if (!container) return;
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  container.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  container.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff < 0) {
+        // Swiped Left -> Next
+        navigatePhotoModal(1);
+      } else {
+        // Swiped Right -> Prev
+        navigatePhotoModal(-1);
+      }
+    }
+  }, { passive: true });
+}
+
+// Make every clickable image on page trigger the viewer
+function initAllImageClickLightbox() {
+  document.querySelectorAll(".singer-card, .owner-image-frame, .owner-spotlight-img-box, .achievement-card").forEach(el => {
+    el.style.cursor = "pointer";
+  });
+}
 
 window.openVideoPlayer = function (titleText, videoUrl, embedUrl) {
   const modal = document.getElementById("videoModal");
