@@ -46,7 +46,7 @@
     content="Gujarat's premier event organizer featuring Lead Singer Mansi Dave. Raas Garba, Bhajan, Live Concerts, DJ, Ramel.">
   <meta name="twitter:image" content="https://ajaypanchal25.github.io/Morlo-Group-patan/assets/images/logo/logo.png">
 
-  <!-- Schema.org JSON-LD Structured Data (Google Site Name, Logo, Knowledge Panel & People) -->
+  <!-- Schema.org JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -107,33 +107,32 @@
           "https://youtube.com/@morlogrouppatan?si=gRkl9iuwVO0_GVFK",
           "https://www.facebook.com/share/1DgpCWpbp9/"
         ]
-      },
-      {
-        "@type": "Person",
-        "@id": "https://ajaypanchal25.github.io/Morlo-Group-patan/#mansidave",
-        "name": "Mansi Dave",
-        "alternateName": ["Mansi Dave Singer", "Gujarati Singer Mansi Dave", "Lead Singer Mansi Dave"],
-        "jobTitle": "Lead Singer",
-        "description": "Renowned Gujarati folk, garba, devotional, and live concert singer with Morlo Group Patan.",
-        "image": "https://ajaypanchal25.github.io/Morlo-Group-patan/assets/images/mansi-dave/mansidave.jpg",
-        "performerIn": {
-          "@type": "EntertainmentBusiness",
-          "@id": "https://ajaypanchal25.github.io/Morlo-Group-patan/#organization"
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://ajaypanchal25.github.io/Morlo-Group-patan/#shaileshgoswami",
-        "name": "Shailesh Goswami",
-        "jobTitle": "Owner & Founder",
-        "image": "https://ajaypanchal25.github.io/Morlo-Group-patan/assets/images/owner/withpm.jpg",
-        "worksFor": {
-          "@type": "EntertainmentBusiness",
-          "@id": "https://ajaypanchal25.github.io/Morlo-Group-patan/#organization"
-        }
       }
     ]
   }
+  </script>
+
+  <!-- Inline Universal Image Error & Fallback Handler (Pre-loads before any IMG DOM elements) -->
+  <script>
+    window.handleImageError = function(img, fallbacks) {
+      if (!img) return;
+      var currentSrc = img.src || "";
+      var list = Array.isArray(fallbacks) ? fallbacks : (fallbacks ? [fallbacks] : []);
+      var triedIndex = parseInt(img.dataset.triedFallbackIndex || "-1", 10);
+      var nextIndex = triedIndex + 1;
+
+      if (nextIndex < list.length && list[nextIndex]) {
+        img.dataset.triedFallbackIndex = nextIndex;
+        img.src = list[nextIndex];
+      } else if (!img.dataset.triedRootFallback) {
+        img.dataset.triedRootFallback = "true";
+        var parts = currentSrc.split("/");
+        var fn = parts[parts.length - 1].split("?")[0];
+        if (fn && !currentSrc.endsWith("/" + fn)) {
+          img.src = "images/" + fn;
+        }
+      }
+    };
   </script>
 
   <!-- Google Fonts: Outfit, Plus Jakarta Sans, Cinzel -->
@@ -159,7 +158,10 @@
   <header class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#hero" class="brand" aria-label="Morlo Group Patan Home">
-        <img src="assets/images/logo/logo.png" alt="Morlo Group Logo" class="brand-logo">
+        <img src="assets/images/logo/logo.png" 
+             alt="Morlo Group Logo" 
+             class="brand-logo" 
+             onerror="handleImageError(this, ['images/logo/logo.png', 'images/logo.png', 'logo.png']);">
         <div class="brand-text">
           <span class="brand-name">MORLO <span>GROUP</span></span>
           <span class="brand-tag">PATAN • EVENTS</span>
@@ -204,8 +206,11 @@
     </div>
   </header>
 
+  <!-- ==========================================================================
+       2. HERO SECTION
+       ========================================================================== -->
   <section class="hero" id="hero"
-    style="background-image: linear-gradient(135deg, rgba(7, 11, 25, 0.92) 0%, rgba(13, 21, 39, 0.85) 50%, rgba(7, 11, 25, 0.94) 100%), url('assets/images/events/navratri.jpg'), url('images/navratri.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    style="background-image: linear-gradient(135deg, rgba(7, 11, 25, 0.92) 0%, rgba(13, 21, 39, 0.85) 50%, rgba(7, 11, 25, 0.94) 100%), url('assets/images/events/navratri.jpg'), url('images/events/navratri.jpg'), url('images/navratri.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="container hero-grid">
       <!-- Left Content -->
       <div class="hero-content">
@@ -248,10 +253,15 @@
 
       <!-- Right Media: Real Mansi Dave Card -->
       <div class="hero-media-wrapper">
-        <div class="singer-card" onclick="openMansiDaveGallery('mansiDavePhotosView')" style="cursor: pointer;"
-          title="Click to view Mansi Dave Gallery">
+        <div class="singer-card" onclick="openPhotoViewer('assets/images/mansi-dave/mansidave.jpg', 'Mansi Dave - Lead Singer & Star Performer', ['images/mansi-dave/mansidave.jpg', 'images/mansidave.jpg'])" style="cursor: pointer;"
+          title="Click to view Mansi Dave Photo">
           <div class="singer-card-inner">
-            <img src="assets/images/mansi-dave/mansidave.jpg" alt="Mansi Dave - Lead Singer" class="singer-img">
+            <img src="assets/images/mansi-dave/mansidave.jpg" 
+                 alt="Mansi Dave - Lead Singer" 
+                 class="singer-img"
+                 loading="eager"
+                 decoding="async"
+                 onerror="handleImageError(this, ['images/mansi-dave/mansidave.jpg', 'images/mansidave.jpg', 'assets/images/events/mansidave.jpg.jpeg']);">
 
             <div class="singer-glow-badge">
               <div class="pulse-dot"></div>
@@ -350,10 +360,14 @@
     <div class="container about-grid">
       <!-- About Left: Real Owner + PM Photo -->
       <div class="about-media-wrapper">
-        <div class="owner-image-frame">
+        <div class="owner-image-frame" onclick="openPhotoViewer('assets/images/owner/withpm.jpg', 'Shailesh Goswami with Hon. PM Narendra Modi', ['images/owner/withpm.jpg', 'images/withpm.jpg'])" style="cursor: pointer;" title="Click to view full photo">
           <div class="owner-image-frame-inner">
-            <img src="assets/images/owner/withpm.jpg" alt="Shailesh Goswami - Owner Morlo Group Patan"
-              class="owner-real-img">
+            <img src="assets/images/owner/withpm.jpg" 
+                 alt="Shailesh Goswami - Owner Morlo Group Patan with Hon. PM Modi"
+                 class="owner-real-img" 
+                 loading="eager"
+                 decoding="async"
+                 onerror="handleImageError(this, ['images/owner/withpm.jpg', 'images/withpm.jpg', 'assets/images/events/withpm.jpg.jpg']);">
 
             <div class="owner-badge-overlay">
               <span class="owner-badge-tag">OUR OWNER</span>
@@ -419,7 +433,7 @@
   </section>
 
   <!-- ==========================================================================
-       5. EVENT TYPES SECTION (7 Core Categories)
+       5. EVENT TYPES SECTION (7 Core Categories with Photos)
        ========================================================================== -->
   <section class="event-types-section" id="event-types">
     <div class="container">
@@ -433,14 +447,16 @@
       <div class="event-types-grid">
         <!-- 1. RAAS GARBA -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/events/garba.jpg" 
+                 alt="Raas Garba Event" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/events/garba.jpg', 'images/garba.jpg']);">
+            <div class="type-thumb-badge">Garba Specialist</div>
           </div>
           <h3 class="type-name">RAAS GARBA</h3>
-          <p class="type-desc">High-energy Navratri Dandiya Raas, traditional Gujarati folk Garba, and authentic
-            rhythmic beats.</p>
+          <p class="type-desc">High-energy Navratri Dandiya Raas, traditional Gujarati folk Garba, and authentic rhythmic beats.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('RAAS GARBA')">
             Book Raas Garba &rarr;
           </button>
@@ -448,16 +464,16 @@
 
         <!-- 2. BHAJAN -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-              </path>
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/mansi-dave/Mansi.jpeg" 
+                 alt="Bhajan and Santvani" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/mansi-dave/Mansi.jpeg', 'images/Mansi.jpeg']);">
+            <div class="type-thumb-badge">Devotional</div>
           </div>
-          <h3 class="type-name">BHAJAN</h3>
-          <p class="type-desc">Soulful Santvani, Lok Dayro, and spiritual devotional evenings led by prominent folk
-            artists.</p>
+          <h3 class="type-name">BHAJAN & SANTVANI</h3>
+          <p class="type-desc">Soulful Santvani, Lok Dayro, and spiritual devotional evenings led by prominent folk artists.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('BHAJAN')">
             Book Bhajan &rarr;
           </button>
@@ -465,15 +481,16 @@
 
         <!-- 3. LIVE SHOW -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zm5 7a1 1 0 0 0-2 0 5 5 0 0 1-10 0 1 1 0 0 0-2 0 7 7 0 0 0 6 6.92V19H7a1 1 0 0 0 0 2h10a1 1 0 0 0 0-2h-2v-3.08A7 7 0 0 0 17 9z" />
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/mansi-dave/mansi-stage.jpg" 
+                 alt="Live Concert Stage Show" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/mansi-dave/mansi-stage.jpg', 'images/mansi-stage.jpg']);">
+            <div class="type-thumb-badge">Live Stage</div>
           </div>
-          <h3 class="type-name">LIVE SHOW</h3>
-          <p class="type-desc">Grand stage musical concerts, celebrity orchestras, and live acoustic stage performances.
-          </p>
+          <h3 class="type-name">LIVE SHOW & CONCERTS</h3>
+          <p class="type-desc">Grand stage musical concerts, celebrity orchestras, and live acoustic stage performances.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('LIVE SHOW')">
             Book Live Show &rarr;
           </button>
@@ -481,16 +498,16 @@
 
         <!-- 4. DJ -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3">
-              </path>
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/events/live-dj.jpg" 
+                 alt="High Bass Live DJ Setup" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/events/live-dj.jpg', 'images/live-dj.jpg']);">
+            <div class="type-thumb-badge">High-Bass Sound</div>
           </div>
-          <h3 class="type-name">DJ</h3>
-          <p class="type-desc">Thunderous high-bass sound systems, intelligent stage lighting, moving beams, and DJ
-            nights.</p>
+          <h3 class="type-name">HIGH-BASS LIVE DJ</h3>
+          <p class="type-desc">Thunderous high-bass sound systems, intelligent stage lighting, moving beams, and DJ nights.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('DJ')">
             Book DJ Setup &rarr;
           </button>
@@ -498,16 +515,16 @@
 
         <!-- 5. PRIVATE EVENT -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-              </path>
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/owner/owner3.jpg" 
+                 alt="Royal Private Events and Weddings" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/owner/owner3.jpg', 'images/owner3.jpg']);">
+            <div class="type-thumb-badge">Royal Weddings</div>
           </div>
-          <h3 class="type-name">PRIVATE EVENT</h3>
-          <p class="type-desc">Weddings, Sangeet Sandhya, Ring Ceremonies, Anniversary celebrations, and bespoke private
-            parties.</p>
+          <h3 class="type-name">PRIVATE & ROYAL EVENTS</h3>
+          <p class="type-desc">Weddings, Sangeet Sandhya, Ring Ceremonies, Anniversary celebrations, and bespoke private parties.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('PRIVATE EVENT')">
             Book Private Event &rarr;
           </button>
@@ -515,16 +532,16 @@
 
         <!-- 6. GOVERNMENT EVENT -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-              </path>
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/owner/withpm.jpg" 
+                 alt="Government Festivals and Inaugurations" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/owner/withpm.jpg', 'images/withpm.jpg']);">
+            <div class="type-thumb-badge">State Level</div>
           </div>
-          <h3 class="type-name">GOVERNMENT EVENT</h3>
-          <p class="type-desc">State-level cultural festivals, official government inaugurations, tourism fairs, and
-            public galas.</p>
+          <h3 class="type-name">GOVERNMENT EVENTS</h3>
+          <p class="type-desc">State-level cultural festivals, official government inaugurations, tourism fairs, and public galas.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('GOVERNMENT EVENT')">
             Book Govt Event &rarr;
           </button>
@@ -532,18 +549,16 @@
 
         <!-- 7. RAMEL -->
         <div class="type-card">
-          <div class="type-icon">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z">
-              </path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
-            </svg>
+          <div class="type-card-thumb">
+            <img src="assets/images/owner/owner12.jpg" 
+                 alt="Sacred Ramel Ceremonies" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/owner/owner12.jpg', 'images/owner12.jpg']);">
+            <div class="type-thumb-badge">Spiritual Heritage</div>
           </div>
-          <h3 class="type-name">RAMEL</h3>
-          <p class="type-desc">Traditional sacred Ramel ceremonies, folk spiritual rituals, and deep cultural heritage
-            programs.</p>
+          <h3 class="type-name">SACRED RAMEL</h3>
+          <p class="type-desc">Traditional sacred Ramel ceremonies, folk spiritual rituals, and deep cultural heritage programs.</p>
           <button class="type-book-btn" onclick="selectEventTypeAndScroll('RAMEL')">
             Book Ramel &rarr;
           </button>
@@ -636,9 +651,13 @@
       </div>
 
       <div class="owner-spotlight-card">
-        <div class="owner-spotlight-img-box">
-          <img src="assets/images/owner/withpm.jpg" alt="Shailesh Goswami - Founder & Owner"
-            class="owner-spotlight-img">
+        <div class="owner-spotlight-img-box" onclick="openPhotoViewer('assets/images/owner/withpm.jpg', 'Shailesh Goswami - Founder & Owner with PM Modi', ['images/owner/withpm.jpg', 'images/withpm.jpg'])" style="cursor: pointer;" title="Click to view full photo">
+          <img src="assets/images/owner/withpm.jpg" 
+               alt="Shailesh Goswami - Founder & Owner" 
+               class="owner-spotlight-img"
+               loading="lazy"
+               decoding="async"
+               onerror="handleImageError(this, ['images/owner/withpm.jpg', 'images/withpm.jpg', 'assets/images/events/withpm.jpg.jpg']);">
         </div>
 
         <div class="owner-spotlight-info">
@@ -702,7 +721,7 @@
   </section>
 
   <!-- ==========================================================================
-       8. ACHIEVEMENTS SECTION (Clean Award Placeholders)
+       8. ACHIEVEMENTS SECTION (Real Photographic Honors & Milestones)
        ========================================================================== -->
   <section class="achievements-section" id="achievements">
     <div class="container">
@@ -715,63 +734,71 @@
 
       <div class="achievements-grid">
         <!-- Award 1 -->
-        <div class="achievement-card">
-          <div class="achievement-icon-box">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
-              </path>
-            </svg>
+        <div class="achievement-card" onclick="openPhotoViewer('assets/images/owner/withpm.jpg', 'State Cultural Recognition with Hon. PM Narendra Modi', ['images/owner/withpm.jpg', 'images/withpm.jpg'])" style="cursor: pointer;" title="Click to view photo">
+          <div class="achievement-thumb">
+            <img src="assets/images/owner/withpm.jpg" 
+                 alt="State Cultural Recognition with Hon. PM Narendra Modi" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/owner/withpm.jpg', 'images/withpm.jpg']);">
+            <div class="achievement-zoom-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+            </div>
           </div>
           <h3 class="achievement-title">State Cultural Recognition</h3>
-          <p class="achievement-desc">Honored for exceptional contribution to preserving and propagating Gujarati folk
-            music traditions.</p>
-          <span class="achievement-placeholder-tag">Certificate Slot Ready</span>
+          <p class="achievement-desc">Honored with Prime Minister Narendra Modi for exceptional leadership in Gujarati cultural festivals.</p>
+          <span class="achievement-placeholder-tag">⭐ Prestigious Honor</span>
         </div>
 
         <!-- Award 2 -->
-        <div class="achievement-card">
-          <div class="achievement-icon-box">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7">
-              </path>
-            </svg>
+        <div class="achievement-card" onclick="openPhotoViewer('assets/images/events/navratri.jpg', 'Mega Navratri Festival Celebration Patan', ['images/events/navratri.jpg', 'images/navratri.jpg'])" style="cursor: pointer;" title="Click to view photo">
+          <div class="achievement-thumb">
+            <img src="assets/images/events/navratri.jpg" 
+                 alt="Mega Navratri Festival Award" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/events/navratri.jpg', 'images/navratri.jpg']);">
+            <div class="achievement-zoom-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+            </div>
           </div>
-          <h3 class="achievement-title">Mega Navratri Festival Award</h3>
-          <p class="achievement-desc">Recognized for hosting high-capacity Dandiya Raas events with zero-glitch sound
-            and security.</p>
-          <span class="achievement-placeholder-tag">Certificate Slot Ready</span>
+          <h3 class="achievement-title">Mega Navratri Festival</h3>
+          <p class="achievement-desc">Celebrated for organizing high-capacity Dandiya Raas events with flawless sound & light engineering.</p>
+          <span class="achievement-placeholder-tag">🏆 Festival Milestone</span>
         </div>
 
         <!-- Award 3 -->
-        <div class="achievement-card">
-          <div class="achievement-icon-box">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
-              </path>
-            </svg>
+        <div class="achievement-card" onclick="openPhotoViewer('assets/images/mansi-dave/mansi-stage.jpg', 'Live Stage Concert Excellence - Mansi Dave', ['images/mansi-dave/mansi-stage.jpg', 'images/mansi-stage.jpg'])" style="cursor: pointer;" title="Click to view photo">
+          <div class="achievement-thumb">
+            <img src="assets/images/mansi-dave/mansi-stage.jpg" 
+                 alt="Live Stage Concert Excellence" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/mansi-dave/mansi-stage.jpg', 'images/mansi-stage.jpg']);">
+            <div class="achievement-zoom-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+            </div>
           </div>
-          <h3 class="achievement-title">Santvani & Folk Heritage Honor</h3>
-          <p class="achievement-desc">Felicitated for organizing monumental Santvani nights featuring Gujarat's leading
-            folk luminaries.</p>
-          <span class="achievement-placeholder-tag">Certificate Slot Ready</span>
+          <h3 class="achievement-title">Live Concert Excellence</h3>
+          <p class="achievement-desc">Electrifying stage performances and celebrity orchestra shows across Gujarat and national venues.</p>
+          <span class="achievement-placeholder-tag">🎤 Musical Excellence</span>
         </div>
 
         <!-- Award 4 -->
-        <div class="achievement-card">
-          <div class="achievement-icon-box">
-            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z">
-              </path>
-            </svg>
+        <div class="achievement-card" onclick="openPhotoViewer('assets/images/owner/sevacamp.jpg', 'Social Service & Seva Camp Felicitation', ['images/owner/sevacamp.jpg', 'images/sevacamp.jpg'])" style="cursor: pointer;" title="Click to view photo">
+          <div class="achievement-thumb">
+            <img src="assets/images/owner/sevacamp.jpg" 
+                 alt="Social Service and Seva Camp" 
+                 loading="lazy" 
+                 decoding="async" 
+                 onerror="handleImageError(this, ['images/owner/sevacamp.jpg', 'images/sevacamp.jpg']);">
+            <div class="achievement-zoom-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+            </div>
           </div>
-          <h3 class="achievement-title">1000+ Successful Programs</h3>
-          <p class="achievement-desc">Milestone accomplishment of over one thousand high-impact live entertainment
-            programs delivered.</p>
-          <span class="achievement-placeholder-tag">Award Slot Ready</span>
+          <h3 class="achievement-title">Community Seva Honor</h3>
+          <p class="achievement-desc">Recognized for philanthropic service, social camps, and dedicated community devotion.</p>
+          <span class="achievement-placeholder-tag">🤝 Community Honor</span>
         </div>
       </div>
     </div>
@@ -789,7 +816,7 @@
       </div>
 
       <div class="inquiry-wrapper">
-        <form id="eventInquiryForm" class="inquiry-form">
+        <form id="inquiryForm" class="inquiry-form">
           <!-- Name -->
           <div class="form-group">
             <label for="inquiryName" class="form-label">YOUR NAME</label>
@@ -808,12 +835,12 @@
             <select id="inquiryEventType" class="form-select" required>
               <option value="" disabled selected>Select event category</option>
               <option value="RAAS GARBA">RAAS GARBA</option>
-              <option value="BHAJAN">BHAJAN</option>
-              <option value="LIVE SHOW">LIVE SHOW</option>
-              <option value="DJ">DJ</option>
-              <option value="PRIVATE EVENT">PRIVATE EVENT</option>
+              <option value="BHAJAN">BHAJAN & SANTVANI</option>
+              <option value="LIVE SHOW">LIVE SHOW & CONCERTS</option>
+              <option value="DJ">HIGH-BASS LIVE DJ</option>
+              <option value="PRIVATE EVENT">PRIVATE & ROYAL WEDDING</option>
               <option value="GOVERNMENT EVENT">GOVERNMENT EVENT</option>
-              <option value="RAMEL">RAMEL</option>
+              <option value="RAMEL">SACRED RAMEL</option>
             </select>
           </div>
 
@@ -863,7 +890,10 @@
       <div class="footer-grid">
         <!-- Col 1: Brand -->
         <div class="footer-brand">
-          <img src="assets/images/logo/logo.png" alt="Morlo Group Logo" class="brand-logo">
+          <img src="assets/images/logo/logo.png" 
+               alt="Morlo Group Logo" 
+               class="brand-logo"
+               onerror="handleImageError(this, ['images/logo/logo.png', 'images/logo.png', 'logo.png']);">
           <p class="footer-desc">
             <strong>MORLO GROUP PATAN</strong><br>
             Premier event organizer & entertainment group. Orchestrating sublime musical evenings, Navratri Garba,
@@ -989,7 +1019,7 @@
   <div class="video-modal" id="videoModal" role="dialog" aria-modal="true">
     <div class="video-modal-content">
       <div class="video-modal-header">
-        <h4 class="video-modal-title" id="videoModalTitle">Event Video</h4>
+        <h4 class="video-modal-title" id="videoModalTitle">Event Media</h4>
         <button class="video-modal-close" id="videoModalClose" aria-label="Close Modal">
           <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
