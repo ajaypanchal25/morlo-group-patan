@@ -159,8 +159,8 @@ const GALLERY_DATA = {
       {
         id: "ow-p2",
         title: "EVENT MANAGEMENT",
-        src: "owner2.jpg",
-        fallbacks: ["assets/images/owner/owner2.jpg", "images/owner2.jpg"],
+        src: "owner3.jpg",
+        fallbacks: ["owner2.jpg", "owner3.jpg", "assets/images/owner/owner3.jpg", "assets/images/owner/owner2.jpg", "images/owner3.jpg", "images/owner2.jpg"],
         tag: "Cultural Event Organization"
       },
       {
